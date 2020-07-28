@@ -38,7 +38,7 @@ class PaymentCalendar
     {
         $year = $this->getCurrentYear();
         $numDays = $this->numOfMonthDays();
-		$data = [];
+	$data = [];
         foreach($numDays as $month=>$num){
             for ($i = 1; $i <= $num; $i++) {
                 $date = $year.'/'.$month.'/'.$i;
