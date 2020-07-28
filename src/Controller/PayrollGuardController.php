@@ -18,7 +18,6 @@ class PayrollGuardController extends AbstractController
     public function index(PaymentCalendar $paymentCalendar)
     {
         $paymentDays = $paymentCalendar->getAllPaymentDays();
-        //dump($paymentDays); die;
         return $this->render('payroll_guard/index.html.twig', [
             'paymentDays' => $paymentDays
         ]);
