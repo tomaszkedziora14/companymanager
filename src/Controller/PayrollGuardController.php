@@ -22,4 +22,26 @@ class PayrollGuardController extends AbstractController
             'paymentDays' => $paymentDays
         ]);
     }
+
+    /**
+     * @Route("/csv", name="generate_csc")
+     * @param PaymentCalendar $paymentCalendar
+     * @return Response
+     */
+    public function generateCsvFile(PaymentCalendar $paymentCalendar)
+    {
+        $fp = fopen("../public/paymentdays.csv", 'w');
+        $paymentDays = $paymentCalendar->getAllPaymentDays();
+        foreach($paymentDays as $paymentDay){
+            $list = [$paymentDay['month'],$paymentDay['nameDay'],$paymentDay['numDay']];
+            fputcsv($fp,$list);
+        }
+
+        fclose($fp);
+        $response = new Response();
+        $response->headers->set('Content-Type', 'text/csv');
+        if($response){
+            return $this->redirectToRoute('payroll_guard');
+        }
+    }
 }
