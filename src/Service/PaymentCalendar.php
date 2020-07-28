@@ -51,7 +51,7 @@ class PaymentCalendar
                     $data[$month]['nameDay'] = $day_name;
                     $data[$month]['numDay'] = $i;
                 }
-              }
+            }
         }
         return $data;
     }
