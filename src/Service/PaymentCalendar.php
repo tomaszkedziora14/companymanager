@@ -42,15 +42,15 @@ class PaymentCalendar
         $numDays = $this->numOfMonthDays();
 		$data = [];
         foreach($numDays as $month=>$num){
-              for ($i = 1; $i <= $num; $i++) {
-                  $date = $year.'/'.$month.'/'.$i;
-                  $get_name = date('l', strtotime($date));
-                  $day_name = substr($get_name, 0, 3);
-                  if($day_name != 'Sun' && $day_name != 'Sat'){
-					  $data[$month]['month'] = $month;
-					  $data[$month]['nameDay'] = $day_name;
-					  $data[$month]['numDay'] = $i;
-                  }
+            for ($i = 1; $i <= $num; $i++) {
+                $date = $year.'/'.$month.'/'.$i;
+                $get_name = date('l', strtotime($date));
+                $day_name = substr($get_name, 0, 3);
+                if($day_name != 'Sun' && $day_name != 'Sat'){
+                    $data[$month]['month'] = $month;
+                    $data[$month]['nameDay'] = $day_name;
+                    $data[$month]['numDay'] = $i;
+                }
               }
         }
         return $data;
