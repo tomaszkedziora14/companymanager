@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Payment Days{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h2>Days to payment</h2>
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th>Month</th>
+                <th>Day Week</th>
+                <th>Day payment</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for day in paymentDays %}
+            <tr>
+                <td>{{ day.month }}</td>
+                <td>{{ day.nameDay }}</td>
+                <td>{{ day.numDay }}</td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
