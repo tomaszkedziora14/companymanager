@@ -47,9 +47,9 @@ class PaymentCalendar
                   $get_name = date('l', strtotime($date));
                   $day_name = substr($get_name, 0, 3);
                   if($day_name != 'Sun' && $day_name != 'Sat'){
-					  $data[$month]['month'] = $month;
-					  $data[$month]['nameDay'] = $day_name;
-					  $data[$month]['numDay'] = $i;
+			$data[$month]['month'] = $month;
+			$data[$month]['nameDay'] = $day_name;
+			$data[$month]['numDay'] = $i;
                   }
               }
         }
