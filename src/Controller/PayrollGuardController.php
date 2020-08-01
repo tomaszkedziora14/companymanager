@@ -6,7 +6,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Response;
 use App\Service\PaymentCalendar;
-use App\Manager\PayrollManager;
+use App\Service\CsvWriter;
+
 
 class PayrollGuardController extends AbstractController
 {
@@ -26,22 +27,14 @@ class PayrollGuardController extends AbstractController
     /**
      * @Route("/csv", name="generate_csc")
      * @param PaymentCalendar $paymentCalendar
+     * @param CsvWriter $csvWriter
      * @return Response
      */
-    public function generateCsvFile(PaymentCalendar $paymentCalendar)
+    public function generateCsvFile(PaymentCalendar $paymentCalendar, CsvWriter $csvWriter)
     {
-        $fp = fopen("../public/paymentdays.csv", 'w');
-        $paymentDays = $paymentCalendar->getAllPaymentDays();
-        foreach($paymentDays as $paymentDay){
-            $list = [$paymentDay['month'],$paymentDay['nameDay'],$paymentDay['numDay']];
-            fputcsv($fp,$list);
-        }
-
-        fclose($fp);
-        $response = new Response();
-        $response->headers->set('Content-Type', 'text/csv');
-        if($response){
+        if($csvWriter->createCSVFile($paymentCalendar) === true){
             return $this->redirectToRoute('payroll_guard');
         }
+        return new Response('created csv file');
     }
 }
