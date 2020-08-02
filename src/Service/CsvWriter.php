@@ -13,26 +13,7 @@ class CsvWriter
     {
         $this->fileManager = $fileManager;
     }
-
-    public function testCSV()
-    {
-        $headers = array('Lastname :', 'Firstname :');
-        $rows = array(
-            array('Doe', 'John'),
-            array('Schlüter', 'Rudy'),
-            array('Alvarez', 'Niño')
-        );
-
-        $file = fopen('file.csv', 'w');
-        fputs($file, $bom = (chr(0xEF) . chr(0xBB) . chr(0xBF)));
-        fputcsv($file, $headers, ";");
-        foreach ($rows as $row) {
-            fputcsv($file, $row, ";");
-        }
-
-        fclose($file);
-    }
-
+    
     public function createCSVFile($data)
     {
         if($this->fileManager->ifFileExist('paymentdays.csv') === false) {
