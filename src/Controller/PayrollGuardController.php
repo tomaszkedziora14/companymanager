@@ -36,6 +36,7 @@ class PayrollGuardController extends AbstractController
     ) {
         $csvWriter = new CsvWriter($fileManager);
         $csvWriter->createCSVFile($paymentCalendar);
+        //$csvWriter->testCSV();
         return $this->redirectToRoute('payroll_guard');
     }
 }
