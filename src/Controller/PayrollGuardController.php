@@ -28,13 +28,11 @@ class PayrollGuardController extends AbstractController
     /**
      * @Route("/csv", name="generate_csc")
      * @param PaymentCalendar $paymentCalendar
-     * @param FileManager $fileManager
      * @param WriterContext $writer
      * @return Response
      */
     public function generateCsvFile(
         PaymentCalendar $paymentCalendar,
-        FileManager $fileManager,
         WriterContext $writer
 
     ) {
