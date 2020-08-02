@@ -4,9 +4,8 @@
 namespace App\Service;
 
 use App\Manager\FileManager;
-use App\Service\StrategyWriterInterface;
 
-class CsvWriter implements StrategyWriterInterface
+class CsvWriter
 {
     private $fileManager;
 
