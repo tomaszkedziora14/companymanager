@@ -4,8 +4,9 @@
 namespace App\Service;
 
 use App\Manager\FileManager;
+use App\Service\StrategyWriterInterface;
 
-class CsvWriter
+class CsvWriter implements StrategyWriterInterface
 {
     private $fileManager;
 
@@ -14,7 +15,7 @@ class CsvWriter
         $this->fileManager = $fileManager;
     }
 
-    public function createCSVFile($data)
+    public function createFile($data)
     {
         if($this->fileManager->ifFileExist('paymentdays.csv') === false) {
             $headers = array('Month', 'Name Day', 'Num Day');

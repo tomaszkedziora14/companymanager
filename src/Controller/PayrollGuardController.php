@@ -8,6 +8,7 @@ use Symfony\Component\HttpFoundation\Response;
 use App\Service\PaymentCalendar;
 use App\Service\CsvWriter;
 use App\Manager\FileManager;
+use App\Service\WriterContext;
 
 class PayrollGuardController extends AbstractController
 {
@@ -28,14 +29,17 @@ class PayrollGuardController extends AbstractController
      * @Route("/csv", name="generate_csc")
      * @param PaymentCalendar $paymentCalendar
      * @param FileManager $fileManager
+     * @param WriterContext $writer
      * @return Response
      */
     public function generateCsvFile(
         PaymentCalendar $paymentCalendar,
-        FileManager $fileManager
+        FileManager $fileManager,
+        WriterContext $writer
+
     ) {
-        $csvWriter = new CsvWriter($fileManager);
-        $csvWriter->createCSVFile($paymentCalendar);
+        $csvWriter = $writer->getWriter('csv');
+        $csvWriter->createFile($paymentCalendar);
         return $this->redirectToRoute('payroll_guard');
     }
 }
