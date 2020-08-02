@@ -13,7 +13,7 @@ class CsvWriter
     {
         $this->fileManager = $fileManager;
     }
-    
+
     public function createCSVFile($data)
     {
         if($this->fileManager->ifFileExist('paymentdays.csv') === false) {
