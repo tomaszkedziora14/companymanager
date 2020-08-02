@@ -5,14 +5,13 @@ namespace App\Service;
 
 use App\Manager\FileManager;
 
-
 class CsvWriter
 {
     private $fileManager;
 
-    public function __construct()
+    public function __construct(FileManager $fileManager)
     {
-        $this->fileManager = new FileManager;
+        $this->fileManager = $fileManager;
     }
 
     public function createCSVFile($data)
