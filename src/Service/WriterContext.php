@@ -19,7 +19,7 @@ class WriterContext
                 $this->writer = new CsvWriter(new FileManager);
                 break;
             case "xml":
-            //    $this->writer = new XMLWriter();
+            //    $this->writer = new XMLWriter(new FileManager);
                 break;
             default:
                 throw new \InvalidArgumentException("{$writerType} is not supported");
