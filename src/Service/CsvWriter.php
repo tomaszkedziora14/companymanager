@@ -4,8 +4,9 @@
 namespace App\Service;
 
 use App\Manager\FileManager;
+use App\Service\WriterInterface;
 
-class CsvWriter
+class CsvWriter implements WriterInterface
 {
     private $fileManager;
 

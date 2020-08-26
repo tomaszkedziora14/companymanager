@@ -1,30 +1,22 @@
 <?php
 
-
 namespace App\Service;
 
-
-use App\Service\StrategyWriterInterface;
 use App\Service\CsvWriter;
 use App\Manager\FileManager;
+use App\Service\WriterInterface;
 
 class WriterContext
 {
     private $writer;
 
-    public function getWriter($writerType)
+    public function setWriter(WriterInterface $writer)
     {
-        switch ($writerType) {
-            case "csv":
-                $this->writer = new CsvWriter(new FileManager);
-                break;
-            case "xml":
-            //    $this->writer = new XMLWriter(new FileManager);
-                break;
-            default:
-                throw new \InvalidArgumentException("{$writerType} is not supported");
-        }
+        $this->writer = $writer;
+    }
 
-        return   $this->writer;
+    public function getWriter()
+    {
+        return  $this->writer;
     }
 }
