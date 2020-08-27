@@ -26,6 +26,7 @@ class PayrollGuardController extends AbstractController
 
     /**
      * @Route("/csv", name="generate_csc")
+     *
      * @param PaymentCalendar $paymentCalendar
      * @param WriterContext $writer
      */
