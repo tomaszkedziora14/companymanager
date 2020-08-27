@@ -15,7 +15,6 @@ class PayrollGuardController extends AbstractController
     /**
      * @Route("/payroll/guard", name="payroll_guard")
      * @param PaymentCalendar $paymentCalendar
-     * @return Response
      */
     public function index(PaymentCalendar $paymentCalendar)
     {
@@ -29,7 +28,6 @@ class PayrollGuardController extends AbstractController
      * @Route("/csv", name="generate_csc")
      * @param PaymentCalendar $paymentCalendar
      * @param WriterContext $writer
-     * @return Response
      */
     public function generateCsvFile(
         PaymentCalendar $paymentCalendar,
