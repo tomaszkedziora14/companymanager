@@ -14,18 +14,18 @@ class PayrollGuardController extends AbstractController
     private $paymentCalendar;
     private $csvWriter;
     private $xlsxWriter;
-    private $writerContex;
+    private $writerContext;
 
     public function __construct(
         PaymentCalendar $paymentCalendar,
         CsvWriter $csvWriter,
         XlsxWriter $xlsxWriter,
-        WriterContext $writerContex
+        WriterContext $writerContext
     ) {
         $this->paymentCalendar = $paymentCalendar;
         $this->csvWriter = $csvWriter;
         $this->xlsxWriter = $xlsxWriter;
-        $this->writerContex = $writerContex;
+        $this->writerContext = $writerContext;
     }
     /**
      * @Route("/payroll/guard", name="payroll_guard")
@@ -43,8 +43,8 @@ class PayrollGuardController extends AbstractController
      */
     public function generateCsvFile()
     {
-        $this->writerContex->setWriter($this->csvWriter);
-        $csv = $this->writerContex->getWriter();
+        $this->writerContext->setWriter($this->csvWriter);
+        $csv = $this->writerContext->getWriter();
         $csv->createFile($this->paymentCalendar);
 
         return $this->redirectToRoute('payroll_guard');
@@ -55,8 +55,8 @@ class PayrollGuardController extends AbstractController
      */
     public function generateXlsxFile()
     {
-        $this->writerContex->setWriter($this->xlsxWriter);
-        $xlsx = $this->writerContex->getWriter();
+        $this->writerContext->setWriter($this->xlsxWriter);
+        $xlsx = $this->writerContext->getWriter();
         $xlsx->createFile($this->paymentCalendar);
 
         return $this->redirectToRoute('payroll_guard');
