@@ -16,7 +16,8 @@ class XlsxWriter implements WriterInterface
         array_unshift($tbl, $headers);
 
         $spreadsheet = new Spreadsheet();
-        $spreadsheet->getActiveSheet()->fromArray($tbl,
+        $spreadsheet->getActiveSheet()->fromArray(
+                    $tbl,
                     NULL,
                     'A1');
 

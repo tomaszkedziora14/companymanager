@@ -23,6 +23,13 @@
             {% endfor %}
             </tbody>
         </table>
-        <a class="btn btn-info" href={{ path('generate_csc')}}>generate CSV file</a>
+        <div class="dropdown">
+            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Dropdown Example
+                <span class="caret"></span></button>
+            <ul class="dropdown-menu">
+                <li><a href={{ path('generate_csc')}}>CSV</a></li>
+                <li><a href={{ path('generate_xlsx')}}>XLSX</a></li>
+            </ul>
+        </div>
     </div>
 {% endblock %}

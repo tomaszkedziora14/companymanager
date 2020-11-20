@@ -2,9 +2,7 @@
 
 namespace App\Strategy;
 
-use App\Service\CsvWriter;
-use App\Manager\FileManager;
-use App\Service\WriterInterface;
+use App\Strategy\WriterInterface;
 
 class WriterContext
 {
