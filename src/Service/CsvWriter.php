@@ -2,33 +2,31 @@
 
 namespace App\Service;
 
-use App\Manager\FileManager;
 use App\Service\WriterInterface;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Csv;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
 class CsvWriter implements WriterInterface
 {
-    private $fileManager;
-
-    public function __construct(FileManager $fileManager)
-    {
-        $this->fileManager = $fileManager;
-    }
-
     public function createFile($data)
     {
-        if($this->fileManager->ifFileExist('paymentdays.csv') === false) {
-            $fp = fopen("../public/paymentdays.csv", 'w');
-            fputs($fp, $bom = (chr(0xEF) . chr(0xBB) . chr(0xBF)));
-            fputcsv($fp, $data->getHeaders(), ";");
-            $paymentDays = $data->getAllPaymentDays();
-            foreach ($paymentDays as $paymentDay) {
-                $list = [$paymentDay['month'], $paymentDay['nameDay'], $paymentDay['numDay']];
-                fputcsv($fp,$list,";");
-            }
+        $tbl = $data->getAllPaymentDays();
+        $headers = $data->getHeaders();
 
-            fclose($fp);
-            return true;
-        }
-        return false;
+        array_unshift($tbl, $headers);
+
+        $spreadsheet = new Spreadsheet();
+        $spreadsheet->getActiveSheet()->fromArray($tbl,
+            NULL,
+            'A1');
+
+            $writer = new Csv($spreadsheet);
+            $writer->setUseBOM(true);
+            $writer->setDelimiter(";");
+            $writer->setEnclosure(' ');
+            $writer->setLineEnding("\r\n");
+            $writer->setSheetIndex(0);
+            $writer->save('paymentdays.csv');
     }
 }

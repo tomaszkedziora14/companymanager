@@ -6,7 +6,6 @@ use App\Service\WriterInterface;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
-
 class XlsxWriter implements WriterInterface
 {
     public function createFile($data)

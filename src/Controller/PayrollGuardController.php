@@ -46,6 +46,7 @@ class PayrollGuardController extends AbstractController
         $this->writerContex->setWriter($this->csvWrite);
         $csv = $this->writerContex->getWriter();
         $csv->createFile($this->paymentCalendar);
+
         return $this->redirectToRoute('payroll_guard');
     }
 
@@ -57,6 +58,7 @@ class PayrollGuardController extends AbstractController
         $this->writerContex->setWriter($this->xlsxWriter);
         $xlsx = $this->writerContex->getWriter();
         $xlsx->createFile($this->paymentCalendar);
+
         return $this->redirectToRoute('payroll_guard');
     }
 }
