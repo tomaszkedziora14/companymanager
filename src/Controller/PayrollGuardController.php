@@ -12,18 +12,18 @@ use App\Service\WriterContext;
 class PayrollGuardController extends AbstractController
 {
     private $paymentCalendar;
-    private $csvWrite;
+    private $csvWriter;
     private $xlsxWriter;
     private $writerContex;
 
     public function __construct(
         PaymentCalendar $paymentCalendar,
-        CsvWriter $csvWrite,
+        CsvWriter $csvWriter,
         XlsxWriter $xlsxWriter,
         WriterContext $writerContex
     ) {
         $this->paymentCalendar = $paymentCalendar;
-        $this->csvWrite = $csvWrite;
+        $this->csvWriter = $csvWriter;
         $this->xlsxWriter = $xlsxWriter;
         $this->writerContex = $writerContex;
     }
@@ -43,7 +43,7 @@ class PayrollGuardController extends AbstractController
      */
     public function generateCsvFile()
     {
-        $this->writerContex->setWriter($this->csvWrite);
+        $this->writerContex->setWriter($this->csvWriter);
         $csv = $this->writerContex->getWriter();
         $csv->createFile($this->paymentCalendar);
 
