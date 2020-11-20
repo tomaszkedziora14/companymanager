@@ -27,6 +27,7 @@ class PayrollGuardController extends AbstractController
         $this->xlsxWriter = $xlsxWriter;
         $this->writerContext = $writerContext;
     }
+    
     /**
      * @Route("/payroll/guard", name="payroll_guard")
      */
