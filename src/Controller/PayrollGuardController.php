@@ -4,22 +4,35 @@ namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\HttpFoundation\Response;
 use App\Service\PaymentCalendar;
 use App\Service\CsvWriter;
 use App\Service\XlsxWriter;
-use App\Manager\FileManager;
 use App\Service\WriterContext;
 
 class PayrollGuardController extends AbstractController
 {
+    private $paymentCalendar;
+    private $csvWrite;
+    private $xlsxWriter;
+    private $writerContex;
+
+    public function __construct(
+        PaymentCalendar $paymentCalendar,
+        CsvWriter $csvWrite,
+        XlsxWriter $xlsxWriter,
+        WriterContext $writerContex
+    ) {
+        $this->paymentCalendar = $paymentCalendar;
+        $this->csvWrite = $csvWrite;
+        $this->xlsxWriter = $xlsxWriter;
+        $this->writerContex = $writerContex;
+    }
     /**
      * @Route("/payroll/guard", name="payroll_guard")
-     * @param PaymentCalendar $paymentCalendar
      */
-    public function index(PaymentCalendar $paymentCalendar)
+    public function index()
     {
-        $paymentDays = $paymentCalendar->getAllPaymentDays();
+        $paymentDays = $this->paymentCalendar->getAllPaymentDays();
         return $this->render('payroll_guard/index.html.twig', [
             'paymentDays' => $paymentDays
         ]);
@@ -27,35 +40,23 @@ class PayrollGuardController extends AbstractController
 
     /**
      * @Route("/payroll/guard/csv", name="generate_csc")
-     *
-     * @param PaymentCalendar $paymentCalendar
-     * @param WriterContext $writer
      */
-    public function generateCsvFile(
-        PaymentCalendar $paymentCalendar,
-        CsvWriter $csvWriter,
-        WriterContext $writer
-    ) {
-        $writer->setWriter($csvWriter);
-        $csv = $writer->getWriter();
-        $csv->createFile($paymentCalendar);
+    public function generateCsvFile()
+    {
+        $this->writerContex->setWriter($this->csvWrite);
+        $csv = $this->writerContex->getWriter();
+        $csv->createFile($this->paymentCalendar);
         return $this->redirectToRoute('payroll_guard');
     }
 
     /**
      * @Route("/payroll/guard/xlsx", name="generate_xlsx")
-     *
-     * @param PaymentCalendar $paymentCalendar
-     * @param WriterContext $writer
      */
-    public function generateXlsxFile(
-        PaymentCalendar $paymentCalendar,
-        xlsxWriter $xlsxWriter,
-        WriterContext $writer
-    ) {
-        $writer->setWriter($xlsxWriter);
-        $xlsx = $writer->getWriter();
-        $xlsx->createFile($paymentCalendar);
+    public function generateXlsxFile()
+    {
+        $this->writerContex->setWriter($this->xlsxWriter);
+        $xlsx = $this->writerContex->getWriter();
+        $xlsx->createFile($this->paymentCalendar);
         return $this->redirectToRoute('payroll_guard');
     }
 }
