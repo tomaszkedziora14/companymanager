@@ -2,7 +2,7 @@
 
 namespace App\Service;
 
-use App\Service\WriterInterface;
+use App\Strategy\WriterInterface;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 

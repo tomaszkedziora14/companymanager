@@ -7,7 +7,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use App\Service\PaymentCalendar;
 use App\Service\CsvWriter;
 use App\Service\XlsxWriter;
-use App\Service\WriterContext;
+use App\Strategy\WriterContext;
 
 class PayrollGuardController extends AbstractController
 {
