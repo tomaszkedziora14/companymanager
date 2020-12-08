@@ -5,7 +5,6 @@ namespace App\Service;
 use App\Strategy\WriterInterface;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Csv;
-use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
 class CsvWriter implements WriterInterface
 {
